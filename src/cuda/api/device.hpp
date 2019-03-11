@@ -440,9 +440,9 @@ public:
 	 */
 	device::pci_location_t pci_id() const
 	{
-		auto pci_domain_id = get_attribute(cudaDevAttrPciDomainId);
-		auto pci_bus_id = get_attribute(cudaDevAttrPciBusId);
-		auto pci_device_id = get_attribute(cudaDevAttrPciDeviceId);
+		auto pci_domain_id = get_attribute(static_cast<attribute_t>(cudaDevAttrPciDomainId));
+		auto pci_bus_id = get_attribute(static_cast<attribute_t>(cudaDevAttrPciBusId));
+		auto pci_device_id = get_attribute(static_cast<attribute_t>(cudaDevAttrPciDeviceId));
 		return {pci_domain_id, pci_bus_id, pci_device_id};
 	}
 
@@ -475,7 +475,7 @@ public:
 	attribute_value_t get_attribute(attribute_t attribute) const
 	{
 		attribute_value_t attribute_value;
-		auto ret = cudaDeviceGetAttribute(&attribute_value, attribute, id());
+		auto ret = cudaDeviceGetAttribute(&attribute_value, static_cast<cudaDeviceAttr>(attribute), id());
 		throw_if_error(ret, "Failed obtaining device properties for " + device_id_as_str());
 		return attribute_value;
 	}

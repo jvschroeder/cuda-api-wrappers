@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 	// Attributes and properties
 	// ---------------------------
 
-	auto max_registers_per_block = device.get_attribute(cudaDevAttrMaxRegistersPerBlock);
+	auto max_registers_per_block = device.get_attribute(static_cast<cuda::device::attribute_t>(cudaDevAttrMaxRegistersPerBlock));
 	std::cout
 		<< "Maximum number of registers per block on this device: "
 		<< max_registers_per_block << "\n";
