@@ -59,7 +59,7 @@ int main(void)
 
 	cuda::launch(
 		vectorAdd,
-		{ blocksPerGrid, threadsPerBlock },
+		{ cuda::grid_dimensions_t(blocksPerGrid), cuda::grid_block_dimensions_t(threadsPerBlock) },
 		d_A.get(), d_B.get(), d_C.get(), numElements
 	);
 
